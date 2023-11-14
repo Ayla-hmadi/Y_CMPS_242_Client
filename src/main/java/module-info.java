@@ -4,4 +4,6 @@ module com.example.yclient {
 
     opens com.example.yclient to javafx.fxml;
     exports com.example.yclient;
+    exports com.example.yclient.Controller;
+    opens com.example.yclient.Controller to javafx.fxml;
 }

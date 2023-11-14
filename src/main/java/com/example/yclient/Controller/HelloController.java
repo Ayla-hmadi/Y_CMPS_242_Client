@@ -1,4 +1,4 @@
-package com.example.yclient;
+package com.example.yclient.Controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
