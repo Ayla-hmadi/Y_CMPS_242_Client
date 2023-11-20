@@ -27,8 +27,27 @@
     -fx-font-weight: 700;
 }
 
+.btn-tertiary {
+    -fx-background-color: #bbb;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 42px;
+    -fx-padding: 10px;
+    -fx-font-size: 14;
+    -fx-font-weight: 700;
+}
+
+.btn-tertiary:hover {
+    -fx-background-color: #aaa;
+}
+
 .btn-secondary:hover {
     -fx-background-color: #e8f4fc;
+}
+
+.btn-icon {
+    -fx-background-color: transparent;
+    -fx-font-size: 14;
+    -fx-font-weight: 700;
 }
 
 .input {
