@@ -1,16 +1,24 @@
 package com.example.yclient.Controller;
 
+import com.example.yclient.Main;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class AuthController implements Initializable {
+public class SignUpController implements Initializable {
     @FXML
     private Label inputMessage;
     @FXML
@@ -18,7 +26,7 @@ public class AuthController implements Initializable {
     @FXML
     private TextField usernameField;
     @FXML
-    private TextField passwordField;
+    private PasswordField passwordField;
     @FXML
     private TextField nameField;
     @FXML
@@ -31,27 +39,8 @@ public class AuthController implements Initializable {
     private VBox infoInputBox2;
 
     @FXML
-    protected void signIn(ActionEvent e) {
-        try{
-            if(usernameField.getText().isBlank() || passwordField.getText().isBlank()){
-                inputMessage.setText("Please enter your username and password.");
-            } else {
-                System.out.println("login");
-            }
-        } catch(Exception ex) {
-            inputMessage.setText("Oops! Something went wrong.");
-            ex.printStackTrace();
-        }
-    }
-
-    @FXML
-    protected void createAccount(ActionEvent e) {
-
-    }
-
-    @FXML
-    protected void next(ActionEvent e){
-        if(nameField.getText().isBlank() || addressField.getText().isBlank() || emailField.getText().isBlank()) {
+    protected void next() {
+        if (nameField.getText().isBlank() || addressField.getText().isBlank() || emailField.getText().isBlank()) {
             inputMessage.setText("Please fill in all the required fields.");
             return;
         }
@@ -61,24 +50,33 @@ public class AuthController implements Initializable {
     }
 
     @FXML
-    protected void prev(ActionEvent e) {
+    protected void prev() {
         infoInputBox2.setVisible(false);
         infoInputBox1.setVisible(true);
+        inputMessage2.setText("");
     }
 
     @FXML
-    protected void signUp(ActionEvent e) {
-        try{
-            if(usernameField.getText().isBlank() || passwordField.getText().isBlank()){
+    protected void signUp() {
+        try {
+            if (usernameField.getText().isBlank() || passwordField.getText().isBlank()) {
                 inputMessage2.setText("Please enter your username and password.");
             } else {
                 inputMessage2.setText("");
                 System.out.println("signup");
             }
-        } catch(Exception ex) {
-            inputMessage2.setText("Oops! Something went wrong.");
+        } catch (Exception ex) {
+            inputMessage.setText("Oops! Something went wrong.");
             ex.printStackTrace();
         }
+    }
+
+    @FXML
+    protected void goToSignIn(ActionEvent e) throws IOException {
+        Parent newRoot = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("View/main.fxml")));
+        Node source = (Node) e.getSource();
+        Stage primaryStage = (Stage) source.getScene().getWindow();
+        primaryStage.getScene().setRoot(newRoot);
     }
 
     @Override
