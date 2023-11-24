@@ -1,21 +1,16 @@
 package com.example.yclient.Controller;
 
-import com.example.yclient.Main;
+import com.example.yclient.Util.Router;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SignUpController implements Initializable {
@@ -37,6 +32,7 @@ public class SignUpController implements Initializable {
     private VBox infoInputBox1;
     @FXML
     private VBox infoInputBox2;
+    private final Router router = new Router();
 
     @FXML
     protected void next() {
@@ -73,10 +69,7 @@ public class SignUpController implements Initializable {
 
     @FXML
     protected void goToSignIn(ActionEvent e) throws IOException {
-        Parent newRoot = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("View/main.fxml")));
-        Node source = (Node) e.getSource();
-        Stage primaryStage = (Stage) source.getScene().getWindow();
-        primaryStage.getScene().setRoot(newRoot);
+        router.navigate(e, "View/main.fxml");
     }
 
     @Override

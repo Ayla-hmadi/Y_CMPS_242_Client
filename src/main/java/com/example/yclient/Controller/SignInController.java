@@ -1,18 +1,13 @@
 package com.example.yclient.Controller;
 
-import com.example.yclient.Main;
+import com.example.yclient.Util.Router;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class SignInController {
     @FXML
@@ -21,6 +16,7 @@ public class SignInController {
     private TextField usernameField;
     @FXML
     private PasswordField passwordField;
+    private final Router router = new Router();
 
     @FXML
     protected void signIn() {
@@ -38,9 +34,6 @@ public class SignInController {
 
     @FXML
     protected void goToSignUp(ActionEvent e) throws IOException {
-        Parent newRoot = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("View/signup.fxml")));
-        Node source = (Node) e.getSource();
-        Stage primaryStage = (Stage) source.getScene().getWindow();
-        primaryStage.getScene().setRoot(newRoot);
+        router.navigate(e, "View/signup.fxml");
     }
 }
