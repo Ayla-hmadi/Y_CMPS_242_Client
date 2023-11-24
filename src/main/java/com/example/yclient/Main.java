@@ -1,16 +1,13 @@
 package com.example.yclient;
 
+import com.example.yclient.Util.ClientSocket;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
 
 public class Main extends Application {
     @Override
@@ -27,6 +24,13 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        ClientSocket socket = ClientSocket.getInstance();
+        socket.send("hello from client");
         launch();
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
