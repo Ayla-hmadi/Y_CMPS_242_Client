@@ -1,5 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
-.parent {
+.btn-primary {
+    -fx-background-color: #33a6f2;
+    -fx-background-radius: 42px;
+    -fx-font-size: 14;
+    -fx-padding: 10px;
+    -fx-font-weight: 700;
+}
 
+.btn-primary:hover {
+    -fx-background-color: #2f93d6;
+}
+
+.btn-secondary {
+    -fx-background-color: #fff;
+    -fx-text-fill: #33a6f2;
+    -fx-background-radius: 42px;
+    -fx-border-radius: 42px;
+    -fx-border-color: #bbb;
+    -fx-padding: 10px;
+    -fx-font-size: 14;
+    -fx-font-weight: 700;
+}
+
+.btn-tertiary {
+    -fx-background-color: #bbb;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 42px;
+    -fx-padding: 10px;
+    -fx-font-size: 14;
+    -fx-font-weight: 700;
+}
+
+.btn-tertiary:hover {
+    -fx-background-color: #aaa;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #e8f4fc;
+}
+
+.btn-icon {
+    -fx-background-color: transparent;
+    -fx-font-size: 14;
+    -fx-font-weight: 700;
+}
+
+.input {
+    -fx-padding: 10px;
+    -fx-font-size: 14;
 }
