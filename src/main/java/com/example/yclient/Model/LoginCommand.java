@@ -1,7 +1,7 @@
-package com.example.yclient.models;
+package com.example.yclient.Model;
 
 public class LoginCommand {
-    private String username;
+    String username, password;
 
     public LoginCommand(String username, String password) {
         this.username = username;
@@ -15,8 +15,6 @@ public class LoginCommand {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    private String password;
 
     public String getUsername() {
         return username;

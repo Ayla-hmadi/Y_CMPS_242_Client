@@ -1,4 +1,4 @@
-package com.example.yclient.models.enums;
+package com.example.yclient.Model.enums;
 
 public enum ReactionType {
     LIKE,

@@ -1,7 +1,7 @@
-package com.example.yclient.models;
+package com.example.yclient.Model;
 
 
-import com.example.yclient.models.enums.ReactionType;
+import com.example.yclient.Model.enums.ReactionType;
 
 public class Reaction {
     private int postId; // Foreign Key

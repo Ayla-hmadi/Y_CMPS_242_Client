@@ -1,4 +1,4 @@
-package com.example.yclient.models;
+package com.example.yclient.Model;
 
 public class Following {
     private String followerUsername; // Foreign Key
