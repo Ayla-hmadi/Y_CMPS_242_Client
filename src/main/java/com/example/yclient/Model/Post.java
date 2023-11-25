@@ -1,16 +1,14 @@
 package com.example.yclient.Model;
 
-
 import java.util.Date;
 
 public class Post {
-    private int id;
+    private int id; // Primary Key
     private String content;
     private Date timestamp;
-    private String username;
+    private String username; // Foreign Key
 
-    public Post() {
-    }
+    public Post() {}
 
     public Post(int id, String content, Date timestamp, String username) {
         this.id = id;

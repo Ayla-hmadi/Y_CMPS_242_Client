@@ -1,13 +1,12 @@
 package com.example.yclient.Model;
 
 public class User {
-    private String username;
+    private String username; // Primary Key
     private String name;
-    private String email;
+    private String email; // Unique Key
     private String password;
 
-    public User() {
-    }
+    public User() {}
 
     public User(String username, String name, String email, String password) {
         this.username = username;

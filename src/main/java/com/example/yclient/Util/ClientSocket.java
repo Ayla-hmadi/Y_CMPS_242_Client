@@ -15,6 +15,7 @@ public class ClientSocket {
 
     /**
      * singleton
+     *
      * @return
      */
     public static ClientSocket getInstance() {
@@ -37,6 +38,7 @@ public class ClientSocket {
             socket = new Socket(SERVER_IP, SERVER_PORT);
             printWriter = new PrintWriter(socket.getOutputStream(), true);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            while (!reader.readLine().equals("OVER"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,6 +50,14 @@ public class ClientSocket {
 
     public String receive() throws IOException {
         return reader.readLine();
+    }
+
+    public String tryReceive() {
+        try {
+            return receive();
+        } catch (Exception ignored) {
+        }
+        return null;
     }
 
     public void close() throws IOException {
