@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.yclient.Controller.FeedController">
+    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="parent" stylesheets="@main.css">
+        <!-- Left Sidebar -->
+       <left>
+          <VBox style="-fx-border-color: #ccc; -fx-border-width: 0 1 0 0; -fx-background-color: white;">
+             <ImageView fitHeight="31.0" fitWidth="33.0" preserveRatio="true">
+                <image>
+                   <Image url="@../Asset/y_logo_520.png" />
+                </image>
+                <VBox.margin>
+                   <Insets left="12.0" />
+                </VBox.margin>
+             </ImageView>
+             <Region minHeight="10" prefHeight="23.0" prefWidth="159.0" /> <!-- Spacing between logo and buttons -->
+
+             <Button fx:id="homeButton" maxWidth="126.0" prefHeight="39.0" prefWidth="0.0" styleClass="btn-transparent" text="Home">
+                <font>
+                   <Font name="System Bold" size="18.0" />
+                </font>
+                <graphic>
+                   <BorderPane>
+                      <left>
+                         <ImageView fitHeight="27.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                            <image>
+                               <Image url="@../Asset/home.png" />
+                            </image>
+                            <BorderPane.margin>
+                               <Insets right="12.0" />
+                            </BorderPane.margin>
+                         </ImageView>
+                      </left>
+                   </BorderPane>
+                </graphic>
+             </Button>
+             <Region minHeight="10" VBox.vgrow="NEVER" />
+             <Button fx:id="exploreButton" layoutX="30.0" layoutY="83.0" maxWidth="126.0" onAction="#goToExploreView" prefHeight="39.0" prefWidth="117.0" styleClass="btn-transparent" text="Explore">
+                <font>
+                   <Font size="16.0" />
+                </font>
+                <graphic>
+                   <BorderPane prefHeight="13.0" prefWidth="31.0">
+                      <left>
+                         <ImageView fitHeight="21.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                            <image>
+                               <Image url="@../Asset/search.png" />
+                            </image>
+                            <BorderPane.margin>
+                               <Insets right="4.0" />
+                            </BorderPane.margin>
+                         </ImageView>
+                      </left>
+                   </BorderPane>
+                </graphic>
+                <VBox.margin>
+                   <Insets left="4.0" />
+                </VBox.margin>
+             </Button>
+             <Region minHeight="10" VBox.vgrow="NEVER" />
+             <Button fx:id="profileButton" maxWidth="126.0" onAction="#goToProfileView" prefHeight="39.0" prefWidth="104.0" styleClass="btn-transparent" text="Profile">
+                <font>
+                   <Font size="16.0" />
+                </font>
+                <graphic>
+                   <BorderPane>
+                      <left>
+                         <ImageView fitHeight="28.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                            <image>
+                               <Image url="@../Asset/profile.png" />
+                            </image>
+                            <BorderPane.margin>
+                               <Insets right="8.0" />
+                            </BorderPane.margin>
+                         </ImageView>
+                      </left>
+                   </BorderPane>
+                </graphic>
+                <VBox.margin>
+                   <Insets left="4.0" />
+                </VBox.margin>
+                <padding>
+                   <Insets right="10.0" />
+                </padding>
+             </Button>
+             <Region layoutX="30.0" layoutY="63.0" minHeight="10" prefHeight="352.0" prefWidth="159.0" />
+             <BorderPane prefHeight="46.0" prefWidth="0.0">
+                <left>
+                   <ImageView fitHeight="46.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-radius: 100%;" BorderPane.alignment="CENTER">
+                      <image>
+                         <Image url="@../Asset/avatar.png" />
+                      </image>
+                   </ImageView>
+                </left>
+                <center>
+                   <VBox BorderPane.alignment="CENTER">
+                      <children>
+                         <Label prefHeight="17.0" prefWidth="125.0" text="Name">
+                            <VBox.margin>
+                               <Insets bottom="4.0" />
+                            </VBox.margin>
+                            <font>
+                               <Font name="System Bold" size="14.0" />
+                            </font>
+                         </Label>
+                         <Label prefHeight="17.0" prefWidth="159.0" text="\@username" textFill="#000000b3">
+                            <font>
+                               <Font size="14.0" />
+                            </font>
+                         </Label>
+                      </children>
+                      <BorderPane.margin>
+                         <Insets left="8.0" />
+                      </BorderPane.margin>
+                   </VBox>
+                </center>
+             </BorderPane>
+             <padding>
+                <Insets bottom="20.0" left="20.0" right="36.0" top="20.0" />
+             </padding>
+          </VBox>
+       </left>
+
+        <!-- Center Content -->
+        <center>
+            <VBox prefHeight="600.0" prefWidth="573.0" style="-fx-background-color: white;" BorderPane.alignment="TOP_LEFT">
+            <VBox prefHeight="4.0" prefWidth="584.0" style="-fx-border-width: 0 0 1 0; -fx-border-color: #eee;">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <Label prefHeight="33.0" prefWidth="59.0" style="-fx-border-width: 0 0 4 0; -fx-border-color: #33a6f2; -fx-padding: 0 0 4 0;" text="For you">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="24.0" top="12.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <ScrollPane prefHeight="563.0" prefWidth="584.0" style="-fx-background-color: white;">
+               <content>
+                  <VBox>
+                     <children>
+                        <BorderPane prefHeight="23.0" prefWidth="569.0" style="-fx-border-width: 0 0 1 0; -fx-border-color: #eee; -fx-background-color: white;">
+                           <left>
+                              <BorderPane BorderPane.alignment="CENTER">
+                                 <top>
+                                    <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                       <image>
+                                          <Image url="@../Asset/avatar.png" />
+                                       </image>
+                                       <BorderPane.margin>
+                                          <Insets right="10.0" />
+                                       </BorderPane.margin>
+                                    </ImageView>
+                                 </top>
+                              </BorderPane>
+                           </left>
+                           <bottom>
+                              <BorderPane prefHeight="35.0" prefWidth="528.0" BorderPane.alignment="CENTER">
+                                 <right>
+                                        <Button onAction="#handleTweet" prefHeight="32.0" prefWidth="82.0" style="-fx-padding: 6;" styleClass="btn-primary" text="Post" BorderPane.alignment="CENTER" />
+                                 </right>
+                                 <BorderPane.margin>
+                                    <Insets top="6.0" />
+                                 </BorderPane.margin>
+                                 <center>
+                                    <BorderPane prefHeight="35.0" prefWidth="387.0" BorderPane.alignment="CENTER">
+                                       <center>
+                                          <ImageView fitHeight="25.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Asset/world.png" />
+                                             </image>
+                                          </ImageView>
+                                       </center>
+                                       <right>
+                                          <Label prefHeight="19.0" prefWidth="409.0" text="Everyone can reply" textFill="#549bff" BorderPane.alignment="CENTER">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                          </Label>
+                                       </right>
+                                    </BorderPane>
+                                 </center>
+                              </BorderPane>
+                           </bottom>
+                           <center>
+                              <TextArea fx:id="postTextArea" prefHeight="77.0" prefWidth="476.0" promptText="What is happening?!" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextArea>
+                           </center>
+                           <padding>
+                              <Insets bottom="12.0" left="20.0" right="20.0" top="24.0" />
+                           </padding>
+                        </BorderPane>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="569.0" style="-fx-background-color: white; -fx-border-width: 0 0 1 0; -fx-border-color: #eee;" text="Showing 10 tweets" textAlignment="JUSTIFY" textFill="#30a5ff">
+                           <padding>
+                              <Insets bottom="8.0" top="8.0" />
+                           </padding>
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <VBox fx:id="postsContainer" prefHeight="0.0" prefWidth="569.0" style="-fx-background-color: white;" />
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <BorderPane.margin>
+               <Insets />
+            </BorderPane.margin>
+            </VBox>
+        </center>
+    </BorderPane>
+</AnchorPane>

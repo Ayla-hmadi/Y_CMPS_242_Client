@@ -19,11 +19,12 @@ public class SignInController {
     private final Router router = new Router();
 
     @FXML
-    protected void signIn() {
+    protected void signIn(ActionEvent e) {
         try {
             if (usernameField.getText().isBlank() || passwordField.getText().isBlank()) {
                 inputMessage.setText("Please enter your username and password.");
             } else {
+                router.navigate(e, "View/feed.fxml");
                 System.out.println("login");
             }
         } catch (Exception ex) {

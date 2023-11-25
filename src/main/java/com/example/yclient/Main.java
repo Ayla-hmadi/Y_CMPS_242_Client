@@ -19,18 +19,19 @@ public class Main extends Application {
         scene.getStylesheets().add(Main.class.getResource("View/main.css").toExternalForm());
 
         stage.setTitle("Y. It's what's happening.");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
-        ClientSocket socket = ClientSocket.getInstance();
-        socket.send("hello from client");
+//        ClientSocket socket = ClientSocket.getInstance();
+//        socket.send("hello from client");
         launch();
-        try {
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            socket.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 }

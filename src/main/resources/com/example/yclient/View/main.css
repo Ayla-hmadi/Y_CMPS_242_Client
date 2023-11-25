@@ -4,8 +4,8 @@
     -fx-background-color: #33a6f2;
     -fx-background-radius: 42px;
     -fx-font-size: 14;
-    -fx-padding: 10px;
     -fx-font-weight: 700;
+    -fx-text-fill: white;
 }
 
 .btn-primary:hover {
@@ -36,6 +36,19 @@
     -fx-background-color: #aaa;
 }
 
+.btn-quaternary {
+    -fx-background-color: #111;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 42px;
+    -fx-padding: 8px 20px;
+    -fx-font-size: 14;
+    -fx-font-weight: 700;
+}
+
+.btn-quaternary:hover {
+    -fx-background-color: #222;
+}
+
 .btn-secondary:hover {
     -fx-background-color: #e8f4fc;
 }
@@ -46,7 +59,20 @@
     -fx-font-weight: 700;
 }
 
+.btn-transparent {
+    -fx-background-color: transparent;
+}
+
+.btn-transparent:hover {
+    -fx-background-color: #eee;
+    -fx-background-radius: 42px;
+}
+
 .input {
     -fx-padding: 10px;
     -fx-font-size: 14;
+}
+
+.hover:hover {
+    -fx-background-color: #eee;
 }
