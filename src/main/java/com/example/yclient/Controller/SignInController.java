@@ -24,6 +24,7 @@ public class SignInController {
             if (usernameField.getText().isBlank() || passwordField.getText().isBlank()) {
                 inputMessage.setText("Please enter your username and password.");
             } else {
+
                 System.out.println("login");
             }
         } catch (Exception ex) {

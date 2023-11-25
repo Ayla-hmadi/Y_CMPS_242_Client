@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
+    private static final String DEFAULT_SERVER_IP = "127.0.0.1";
+    private static final int DEFAULT_SERVER_PORT = 43211;
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("View/main.fxml"));
@@ -24,13 +27,20 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        ClientSocket socket = ClientSocket.getInstance();
-        socket.send("hello from client");
-        launch();
-        try {
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (args.length > 1) {
+            ClientSocket.SERVER_IP = args[0];
+            ClientSocket.SERVER_PORT = Integer.parseInt(args[1]);
+        } else {
+            ClientSocket.SERVER_PORT = DEFAULT_SERVER_PORT;
+            ClientSocket.SERVER_IP = DEFAULT_SERVER_IP;
         }
+
+        launch();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        ClientSocket.terminate();
+        super.stop();
     }
 }
