@@ -33,6 +33,10 @@ public class UsersController {
         router.navigate(e, "View/profile.fxml");
     }
 
+    private void follow(User user) {
+        System.out.println("Follow: " + user);
+    }
+
     @FXML
     public void initialize() {
         for (int i = 0; i < 15; i++) {
@@ -47,6 +51,7 @@ public class UsersController {
             iv.setFitWidth(42);
             Button followBtn = new Button("Follow");
             followBtn.getStyleClass().add("btn-quaternary");
+            followBtn.setOnAction(e->follow(user));
             VBox vb = new VBox();
             Label nameLabel = new Label(user.getName());
             nameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: 700;");

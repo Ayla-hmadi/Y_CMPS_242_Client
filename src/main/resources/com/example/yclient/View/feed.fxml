@@ -174,7 +174,7 @@
                            <bottom>
                               <BorderPane prefHeight="35.0" prefWidth="528.0" BorderPane.alignment="CENTER">
                                  <right>
-                                        <Button onAction="#handleTweet" prefHeight="32.0" prefWidth="82.0" style="-fx-padding: 6;" styleClass="btn-primary" text="Post" BorderPane.alignment="CENTER" />
+                                        <Button onAction="#post" prefHeight="32.0" prefWidth="82.0" style="-fx-padding: 6;" styleClass="btn-primary" text="Post" BorderPane.alignment="CENTER" />
                                  </right>
                                  <BorderPane.margin>
                                     <Insets top="6.0" />

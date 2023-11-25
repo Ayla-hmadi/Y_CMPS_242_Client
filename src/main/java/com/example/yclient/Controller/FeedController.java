@@ -5,6 +5,7 @@ import com.example.yclient.Util.ComponentBuilder;
 import com.example.yclient.Util.Router;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -14,12 +15,19 @@ import java.util.Date;
 public class FeedController {
     @FXML
     private VBox postsContainer;
+    @FXML
+    private TextArea postTextArea;
     private final Router router = new Router();
     private final ComponentBuilder cb = new ComponentBuilder();
     private final ArrayList<Post> posts = new ArrayList<>();
 
     @FXML
-    private void handleTweet() {
+    private void post() {
+        if(postTextArea.getText().isBlank()){
+            return;
+        }
+
+        System.out.println(postTextArea.getText());
     }
 
     @FXML
