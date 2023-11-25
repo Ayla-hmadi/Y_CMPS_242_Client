@@ -1,13 +1,10 @@
 package com.example.yclient.Controller;
 
 import com.example.yclient.Main;
-import com.example.yclient.Model.Post;
 import com.example.yclient.Model.User;
-import com.example.yclient.Util.ComponentBuilder;
 import com.example.yclient.Util.Router;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -17,19 +14,14 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Objects;
 
-public class ExploreController {
+public class UsersController {
     @FXML
-    private VBox whoToFollow;
-    @FXML
-    private VBox whatsHappening;
+    private VBox usersContainer;
 
     private final Router router = new Router();
-    private final ComponentBuilder cb = new ComponentBuilder();
     private final ArrayList<User> suggestedUsers = new ArrayList<>();
-    private final ArrayList<Post> suggestedPosts = new ArrayList<>();
 
     @FXML
     private void goToMainView(ActionEvent e) throws IOException {
@@ -43,12 +35,8 @@ public class ExploreController {
 
     @FXML
     public void initialize() {
-        for (int i = 0; i < 3; i++) {
-            suggestedUsers.add(new User("username", "name", "email@gmail.com", ""));
-        }
-
-        for (int i = 0; i < 5; i++) {
-            suggestedPosts.add(new Post(i, "Placeholder content number " + i, new Date(), "username"));
+        for (int i = 0; i < 15; i++) {
+            suggestedUsers.add(new User("username", "name" + i, "email@gmail.com", ""));
         }
 
         for (User user : suggestedUsers) {
@@ -71,27 +59,7 @@ public class ExploreController {
             bp.getStyleClass().add("hover");
             bp.setStyle("-fx-padding: 8px 20px;");
 
-            whoToFollow.getChildren().add(bp);
-        }
-
-        Button showMoreBtn = new Button();
-        Label showMoreLabel = new Label("See more");
-        showMoreBtn.setMaxWidth(Double.MAX_VALUE);
-        showMoreBtn.setAlignment(Pos.CENTER);
-        showMoreLabel.setStyle("-fx-text-fill: #33a6f2; -fx-padding: 10px; -fx-font-size: 14px; -fx-font-weight: 700;");
-        showMoreBtn.setGraphic(showMoreLabel);
-        showMoreBtn.setStyle("-fx-background-color: transparent;");
-        showMoreBtn.setOnAction(e -> {
-            try {
-                router.navigate(e, "View/users.fxml");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
-        whoToFollow.getChildren().add(showMoreBtn);
-
-        for (Post post : suggestedPosts) {
-            whatsHappening.getChildren().add(cb.buildPost(post));
+            usersContainer.getChildren().add(bp);
         }
     }
 }
