@@ -25,6 +25,7 @@ public class SignInController {
                 inputMessage.setText("Please enter your username and password.");
             } else {
                 router.navigate(e, "View/feed.fxml");
+
                 System.out.println("login");
             }
         } catch (Exception ex) {

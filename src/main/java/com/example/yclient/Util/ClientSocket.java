@@ -4,8 +4,28 @@ import java.io.*;
 import java.net.Socket;
 
 public class ClientSocket {
-    private static final String SERVER_IP = "127.0.0.1";
-    private static final int SERVER_PORT = 6969;
+    /**
+     * Kills the instance
+     */
+    public static void terminate() throws IOException {
+        if (instance != null) {
+            instance.close();
+        }
+    }
+
+    /**
+     * singleton
+     * @return
+     */
+    public static ClientSocket getInstance() {
+        if (instance == null) {
+            instance = new ClientSocket();
+        }
+        return instance;
+    }
+
+    public static String SERVER_IP = "127.0.0.1";
+    public static int SERVER_PORT = 6969;
 
     private static ClientSocket instance;
     private Socket socket;
@@ -22,22 +42,15 @@ public class ClientSocket {
         }
     }
 
-    public static ClientSocket getInstance() {
-        if (instance == null) {
-            instance = new ClientSocket();
-        }
-        return instance;
-    }
-
     public void send(String message) {
         printWriter.println(message);
     }
 
-    public String receive() throws IOException{
+    public String receive() throws IOException {
         return reader.readLine();
     }
 
-    public void close() throws IOException{
+    public void close() throws IOException {
         printWriter.close();
         reader.close();
         socket.close();
