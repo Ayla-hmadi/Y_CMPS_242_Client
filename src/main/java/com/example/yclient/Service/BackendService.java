@@ -16,9 +16,9 @@ public class BackendService {
     public static LoginResponse loginResponse;
 
     public LoginResponse Login(String username, String password) {
-        var hashedPasswrd = BCrypt.hashpw(password, BCrypt.gensalt());
-
-        var command = new LoginCommand(username, hashedPasswrd);
+//        var hashedPasswrd = BCrypt.hashpw(password, BCrypt.gensalt());
+//        var command = new LoginCommand(username, hashedPasswrd);
+       var command = new LoginCommand(username, password);
         NetworkManager.getInstance().send("login");
         Gson gson = new Gson();
         NetworkManager.getInstance().send(gson.toJson(command));
