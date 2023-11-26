@@ -28,7 +28,6 @@ public class SignInController {
                 var service = new BackendService();
                 var loginResult = service.Login(usernameField.getText(), passwordField.getText());
                 if (loginResult.isSuccess()) {
-                    System.out.println(loginResult.getUser().getName());
                     router.navigate(e, "View/feed.fxml");
                 } else {
                     inputMessage.setText(loginResult.getError());
