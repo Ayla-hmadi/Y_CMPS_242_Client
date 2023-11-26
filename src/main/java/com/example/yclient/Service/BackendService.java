@@ -4,7 +4,9 @@ import com.example.yclient.Model.RegisterCommand;
 import com.example.yclient.Util.ClientSocket;
 import com.example.yclient.Model.LoginCommand;
 import com.example.yclient.Model.responses.LoginResponse;
+import com.example.yclient.Util.NetworkManager;
 import com.google.gson.Gson;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class BackendService {
     public static LoginResponse getLoginResponse() {
@@ -14,11 +16,13 @@ public class BackendService {
     public static LoginResponse loginResponse;
 
     public LoginResponse Login(String username, String password) {
-        var command = new LoginCommand(username, password);
-        ClientSocket.getInstance().send("login");
+        var hashedPasswrd = BCrypt.hashpw(password, BCrypt.gensalt());
+
+        var command = new LoginCommand(username, hashedPasswrd);
+        NetworkManager.getInstance().send("login");
         Gson gson = new Gson();
-        ClientSocket.getInstance().send(gson.toJson(command));
-        var json = ClientSocket.getInstance().tryReceive();
+        NetworkManager.getInstance().send(gson.toJson(command));
+        var json = NetworkManager.getInstance().tryReceive();
         System.out.println(json);
         if (json != null) {
             loginResponse = gson.fromJson(json, LoginResponse.class);
@@ -30,13 +34,14 @@ public class BackendService {
 
     public LoginResponse SignUp(String username, String name, String email, String password, String address) {
         var command = new RegisterCommand(username, name, email, password, address);
-        ClientSocket.getInstance().send("register");
+        NetworkManager.getInstance().send("register");
         Gson gson = new Gson();
-        ClientSocket.getInstance().send(gson.toJson(command));
-        var res = ClientSocket.getInstance().tryReceive();
-        if (res.equals("OK")) {
+        NetworkManager.getInstance().send(gson.toJson(command));
+        var json = NetworkManager.getInstance().tryReceive();
+        if (json != null) {
+            loginResponse = gson.fromJson(json, LoginResponse.class);
             System.out.println("Sign up success");
-            return Login(username, password);
+            return loginResponse;
         } else {
             return null;
         }

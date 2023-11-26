@@ -2,6 +2,7 @@ module com.example.yclient {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.google.gson;
+    requires jbcrypt;
 
     opens com.example.yclient to javafx.fxml;
     exports com.example.yclient;

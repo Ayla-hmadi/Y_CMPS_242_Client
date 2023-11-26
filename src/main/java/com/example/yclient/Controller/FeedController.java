@@ -27,7 +27,7 @@ public class FeedController {
     private Label usernameLabel;
     private final Router router = new Router();
     private final ComponentBuilder cb = new ComponentBuilder();
-    private final List<Post> posts = new ArrayList<>();
+    private List<Post> posts = new ArrayList<>();
 
     @FXML
     private void post() {
@@ -40,11 +40,14 @@ public class FeedController {
 
     @FXML
     public void initialize() {
-        for (int i = 0; i < 10; i++) {
-            posts.add(new Post(i, "Placeholder content number " + i, new Date(), "username" + i));
-        }
+//        for (int i = 0; i < 10; i++) {
+//            posts.add(new Post(i, "Placeholder content number " + i, new Date(), "username" + i));
+//        }
 
         User user = BackendService.getLoginResponse().getUser();
+        if (BackendService.getLoginResponse().getPosts() != null) {
+            posts = BackendService.getLoginResponse().getPosts();
+        }
         nameLabel.setText(user.getName());
         usernameLabel.setText("@" + user.getUsername());
 
