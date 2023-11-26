@@ -6,7 +6,8 @@ public class User {
     private String email; // Unique Key
     private String password;
 
-    public User() {}
+    public User() {
+    }
 
     public User(String username, String name, String email, String password) {
         this.username = username;

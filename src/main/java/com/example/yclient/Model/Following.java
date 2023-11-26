@@ -4,7 +4,8 @@ public class Following {
     private String followerUsername; // Foreign Key
     private String followingUsername; // Foreign Key
 
-    public Following() {}
+    public Following() {
+    }
 
     public Following(String followerUsername, String followingUsername) {
         this.followerUsername = followerUsername;

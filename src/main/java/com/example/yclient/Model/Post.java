@@ -8,7 +8,8 @@ public class Post {
     private Date timestamp;
     private String username; // Foreign Key
 
-    public Post() {}
+    public Post() {
+    }
 
     public Post(int id, String content, Date timestamp, String username) {
         this.id = id;

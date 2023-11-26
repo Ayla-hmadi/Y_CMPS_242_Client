@@ -1,27 +1,41 @@
 package com.example.yclient.Controller;
 
 import com.example.yclient.Model.Post;
+import com.example.yclient.Model.User;
+import com.example.yclient.Service.BackendService;
 import com.example.yclient.Util.ComponentBuilder;
 import com.example.yclient.Util.Router;
 import javafx.event.ActionEvent;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class ProfileController {
     @FXML
     private VBox postsContainer;
+    @FXML
+    private Label appBarLabel;
+    @FXML
+    private Label nameLabel;
+    @FXML
+    private Label usernameLabel;
+    @FXML
+    private Label profileNameLabel;
+    @FXML
+    private Label profileUsernameLabel;
+
     private final Router router = new Router();
     private final ComponentBuilder cb = new ComponentBuilder();
-    private final ArrayList<Post> posts = new ArrayList<>();
 
     @FXML
     private void goToMainView(ActionEvent e) throws IOException {
-       router.navigate(e, "View/feed.fxml");
+        router.navigate(e, "View/feed.fxml");
     }
+
     @FXML
     private void goToExploreView(ActionEvent e) throws IOException {
         router.navigate(e, "View/explore.fxml");
@@ -29,9 +43,14 @@ public class ProfileController {
 
     @FXML
     public void initialize() {
-        for (int i = 0; i < 10; i++) {
-            posts.add(new Post(i, "Placeholder content number " + i, new Date(), "username"));
-        }
+        List<Post> posts = BackendService.getLoginResponse().getPosts();
+        User user = BackendService.getLoginResponse().getUser();
+
+        appBarLabel.setText(user.getName());
+        nameLabel.setText(user.getName());
+        usernameLabel.setText("@" + user.getUsername());
+        profileNameLabel.setText(user.getName());
+        profileUsernameLabel.setText("@" + user.getUsername());
 
         for (Post post : posts) {
             postsContainer.getChildren().add(cb.buildPost(post));

@@ -25,7 +25,6 @@ public class SignInController {
             if (usernameField.getText().isBlank() || passwordField.getText().isBlank()) {
                 inputMessage.setText("Please enter your username and password.");
             } else {
-
                 var service = new BackendService();
                 var loginResult = service.Login(usernameField.getText(), passwordField.getText());
                 if (loginResult.isSuccess()) {

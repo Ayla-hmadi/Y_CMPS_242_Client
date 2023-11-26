@@ -8,7 +8,8 @@ public class Reaction {
     private String username; // Foreign Key
     private ReactionType type;
 
-    public Reaction() {}
+    public Reaction() {
+    }
 
     public Reaction(int postId, String username, ReactionType type) {
         this.postId = postId;

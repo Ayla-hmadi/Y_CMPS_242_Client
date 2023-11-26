@@ -108,7 +108,7 @@
                     <center>
                         <VBox BorderPane.alignment="CENTER">
                             <children>
-                                <Label prefHeight="17.0" prefWidth="125.0" text="Name">
+                                <Label fx:id="nameLabel" prefHeight="17.0" prefWidth="125.0" text="Name">
                                     <VBox.margin>
                                         <Insets bottom="4.0" />
                                     </VBox.margin>
@@ -116,7 +116,7 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <Label prefHeight="17.0" prefWidth="159.0" text="\@username" textFill="#000000b3">
+                                <Label fx:id="usernameLabel" prefHeight="17.0" prefWidth="159.0" text="\@username" textFill="#000000b3">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
@@ -150,7 +150,7 @@
                   </Button>
                </left>
                <center>
-                  <Label prefHeight="17.0" prefWidth="517.0" text="Name" BorderPane.alignment="CENTER">
+                  <Label fx:id="appBarLabel" prefHeight="17.0" prefWidth="517.0" text="Name" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -177,12 +177,12 @@
                         </StackPane>
                         <VBox spacing="2.0">
                            <children>
-                              <Label text=" Name Name">
+                              <Label fx:id="profileNameLabel" text=" Name Name">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label text="\@username" textFill="#000000ac">
+                              <Label fx:id="profileUsernameLabel" text="\@username" textFill="#000000ac">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
