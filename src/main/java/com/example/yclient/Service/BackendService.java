@@ -18,6 +18,7 @@ public class BackendService {
     }
 
     public static LoginResponse loginResponse;
+    public static List<Post> feedPosts;
 
     public LoginResponse Login(String username, String password) {
 //        var hashedPasswrd = BCrypt.hashpw(password, BCrypt.gensalt());
@@ -30,6 +31,7 @@ public class BackendService {
         System.out.println(json);
         if (json != null) {
             loginResponse = gson.fromJson(json, LoginResponse.class);
+            GetFeedPosts();
             return loginResponse;
         } else {
             return null;
@@ -48,6 +50,18 @@ public class BackendService {
             return loginResponse;
         } else {
             return null;
+        }
+    }
+
+    public void GetFeedPosts() {
+        NetworkManager.getInstance().send("getPostsByFollowedUsers");
+        NetworkManager.getInstance().send(loginResponse.getUser().getUsername());
+        Gson gson = new Gson();
+        var json = NetworkManager.getInstance().tryReceive();
+        System.out.println(json);
+        if (json != null) {
+            feedPosts = gson.fromJson(json, new TypeToken<List<Post>>() {
+            }.getType());
         }
     }
 
