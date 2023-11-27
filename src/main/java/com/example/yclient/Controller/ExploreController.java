@@ -47,8 +47,10 @@ public class ExploreController {
     }
 
     private void follow(User user) {
-        System.out.println("Follow: " + user);
+        new BackendService().followUser(user.getUsername());
+//        System.out.println("Followed: " + user.getUsername());
     }
+
 
     @FXML
     public void initialize() {

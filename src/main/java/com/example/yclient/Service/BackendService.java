@@ -54,4 +54,22 @@ public class BackendService {
         var res = NetworkManager.getInstance().tryReceive();
         System.out.println("Server: " + res);
     }
+
+    public void followUser(String usernameToFollow) {
+        NetworkManager.getInstance().send("follow");
+        NetworkManager.getInstance().send(usernameToFollow);
+
+        var response = NetworkManager.getInstance().tryReceive();
+        System.out.println("Server response to follow request: " + response);
+    }
+
+    public void unfollowUser(String usernameToUnfollow) {
+        NetworkManager.getInstance().send("unfollow");
+        NetworkManager.getInstance().send(usernameToUnfollow);
+
+        String response = NetworkManager.getInstance().tryReceive();
+        System.out.println("Server response to unfollow request: " + response);
+    }
+
+
 }
