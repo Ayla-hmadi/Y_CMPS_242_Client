@@ -30,7 +30,7 @@ public class ExploreController {
     private Label usernameLabel;
     private final Router router = new Router();
     private final ComponentBuilder cb = new ComponentBuilder();
-    private final ArrayList<User> suggestedUsers = new ArrayList<>();
+    private List<User> suggestedUsers = new ArrayList<>();
     private List<Post> suggestedPosts = new ArrayList<>();
 
     @FXML
@@ -51,9 +51,8 @@ public class ExploreController {
 
     @FXML
     public void initialize() {
-        for (int i = 0; i < 3; i++) {
-            suggestedUsers.add(new User("username", "name", "email@gmail.com", ""));
-        }
+        var service = new BackendService();
+        var users = service.getRandomUsersToFollow();
 
         if (BackendService.getLoginResponse().getPosts() != null) {
             suggestedPosts = BackendService.getLoginResponse().getInterests();
@@ -64,28 +63,31 @@ public class ExploreController {
         nameLabel.setText(user.getName());
         usernameLabel.setText("@" + user.getUsername());
 
-        for (User u : suggestedUsers) {
-            BorderPane bp = new BorderPane();
-            ImageView iv = new ImageView();
-            iv.setImage(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("Asset/avatar.png"))));
-            iv.setFitHeight(42);
-            iv.setFitWidth(42);
-            Button followBtn = new Button("Follow");
-            followBtn.getStyleClass().add("btn-quaternary");
-            followBtn.setOnAction(e -> follow(u));
-            VBox vb = new VBox();
-            Label nameLabel = new Label(u.getName());
-            nameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: 700;");
-            vb.getChildren().add(nameLabel);
-            vb.getChildren().add(new Label("@" + u.getUsername()));
-            vb.setStyle("-fx-padding: 0px 10px;");
-            bp.setLeft(iv);
-            bp.setCenter(vb);
-            bp.setRight(followBtn);
-            bp.getStyleClass().add("hover");
-            bp.setStyle("-fx-padding: 8px 20px;");
+        if (users != null) {
+            for (int i = 0; i < 3; i++) {
+                User u = users.get(i);
+                BorderPane bp = new BorderPane();
+                ImageView iv = new ImageView();
+                iv.setImage(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("Asset/avatar.png"))));
+                iv.setFitHeight(42);
+                iv.setFitWidth(42);
+                Button followBtn = new Button("Follow");
+                followBtn.getStyleClass().add("btn-quaternary");
+                followBtn.setOnAction(e -> follow(u));
+                VBox vb = new VBox();
+                Label nameLabel = new Label(u.getName());
+                nameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: 700;");
+                vb.getChildren().add(nameLabel);
+                vb.getChildren().add(new Label("@" + u.getUsername()));
+                vb.setStyle("-fx-padding: 0px 10px;");
+                bp.setLeft(iv);
+                bp.setCenter(vb);
+                bp.setRight(followBtn);
+                bp.getStyleClass().add("hover");
+                bp.setStyle("-fx-padding: 8px 20px;");
 
-            whoToFollow.getChildren().add(bp);
+                whoToFollow.getChildren().add(bp);
+            }
         }
 
         Button showMoreBtn = new Button();
