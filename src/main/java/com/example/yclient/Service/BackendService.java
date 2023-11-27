@@ -2,6 +2,7 @@ package com.example.yclient.Service;
 
 import com.example.yclient.Model.Post;
 import com.example.yclient.Model.RegisterCommand;
+import com.example.yclient.Model.User;
 import com.example.yclient.Util.ClientSocket;
 import com.example.yclient.Model.LoginCommand;
 import com.example.yclient.Model.responses.LoginResponse;
@@ -10,6 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 public class BackendService {
@@ -106,5 +108,23 @@ public class BackendService {
         System.out.println("Server response to unfollow request: " + response);
     }
 
+    public List<User> getRandomUsersToFollow() {
+        try {
+            NetworkManager.getInstance().send("GetRandomUsersToFollow");
+
+            String jsonResponse = NetworkManager.getInstance().tryReceive();
+
+            if (jsonResponse != null && !jsonResponse.isEmpty()) {
+                Gson gson = new Gson();
+                Type userListType = new TypeToken<List<User>>(){}.getType();
+                return  gson.fromJson(jsonResponse, userListType);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
 }
