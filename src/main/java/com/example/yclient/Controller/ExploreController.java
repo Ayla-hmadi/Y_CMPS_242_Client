@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class ExploreController {
@@ -33,7 +34,7 @@ public class ExploreController {
     private final Router router = new Router();
     private final ComponentBuilder cb = new ComponentBuilder();
     private final ArrayList<User> suggestedUsers = new ArrayList<>();
-    private final ArrayList<Post> suggestedPosts = new ArrayList<>();
+    private List<Post> suggestedPosts = new ArrayList<>();
 
     @FXML
     private void goToMainView(ActionEvent e) throws IOException {
@@ -55,8 +56,8 @@ public class ExploreController {
             suggestedUsers.add(new User("username", "name", "email@gmail.com", ""));
         }
 
-        for (int i = 0; i < 5; i++) {
-            suggestedPosts.add(new Post(i, "Placeholder content number " + i, new Date(), "username"));
+        if (BackendService.getLoginResponse().getPosts() != null) {
+            suggestedPosts = BackendService.getLoginResponse().getInterests();
         }
 
         User user = BackendService.getLoginResponse().getUser();

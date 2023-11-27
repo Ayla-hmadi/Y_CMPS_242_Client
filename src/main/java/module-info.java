@@ -4,7 +4,7 @@ module com.example.yclient {
     requires com.google.gson;
     requires jbcrypt;
 
-    opens com.example.yclient to javafx.fxml;
+    opens com.example.yclient to javafx.fxml, jbcrypt;
     exports com.example.yclient;
     exports com.example.yclient.Controller;
     opens com.example.yclient.Controller to javafx.fxml;

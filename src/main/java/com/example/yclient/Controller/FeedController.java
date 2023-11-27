@@ -35,15 +35,12 @@ public class FeedController {
             return;
         }
 
-        System.out.println(postTextArea.getText());
+        var service = new BackendService();
+        service.Post(postTextArea.getText());
     }
 
     @FXML
     public void initialize() {
-//        for (int i = 0; i < 10; i++) {
-//            posts.add(new Post(i, "Placeholder content number " + i, new Date(), "username" + i));
-//        }
-
         User user = BackendService.getLoginResponse().getUser();
         if (BackendService.getLoginResponse().getPosts() != null) {
             posts = BackendService.getLoginResponse().getPosts();

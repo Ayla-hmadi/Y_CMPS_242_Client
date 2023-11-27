@@ -18,7 +18,7 @@ public class BackendService {
     public LoginResponse Login(String username, String password) {
 //        var hashedPasswrd = BCrypt.hashpw(password, BCrypt.gensalt());
 //        var command = new LoginCommand(username, hashedPasswrd);
-       var command = new LoginCommand(username, password);
+        var command = new LoginCommand(username, password);
         NetworkManager.getInstance().send("login");
         Gson gson = new Gson();
         NetworkManager.getInstance().send(gson.toJson(command));
@@ -45,5 +45,13 @@ public class BackendService {
         } else {
             return null;
         }
+    }
+
+    public void Post(String content) {
+        NetworkManager.getInstance().send("add post");
+        NetworkManager.getInstance().send(content);
+
+        var res = NetworkManager.getInstance().tryReceive();
+        System.out.println("Server: " + res);
     }
 }
