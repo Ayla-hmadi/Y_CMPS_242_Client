@@ -17,10 +17,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class ExploreController {
     @FXML
@@ -60,6 +57,7 @@ public class ExploreController {
 
         if (BackendService.getLoginResponse().getPosts() != null) {
             suggestedPosts = BackendService.getLoginResponse().getInterests();
+            Collections.reverse(suggestedPosts);
         }
 
         User user = BackendService.getLoginResponse().getUser();
