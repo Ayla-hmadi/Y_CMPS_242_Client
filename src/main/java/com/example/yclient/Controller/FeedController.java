@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -30,13 +31,16 @@ public class FeedController {
     private List<Post> posts = new ArrayList<>();
 
     @FXML
-    private void post() {
+    private void post(ActionEvent e) throws IOException{
         if (postTextArea.getText().isBlank()) {
             return;
         }
 
         var service = new BackendService();
-        service.Post(postTextArea.getText());
+        if(service.Post(postTextArea.getText())){
+            System.out.println("Posted successfully");
+            router.navigate(e, "View/feed.fxml");
+        }
     }
 
     @FXML
@@ -44,6 +48,7 @@ public class FeedController {
         User user = BackendService.getLoginResponse().getUser();
         if (BackendService.getLoginResponse().getPosts() != null) {
             posts = BackendService.getLoginResponse().getPosts();
+            Collections.reverse(posts);
         }
         nameLabel.setText(user.getName());
         usernameLabel.setText("@" + user.getUsername());

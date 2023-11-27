@@ -8,6 +8,7 @@ import com.example.yclient.Util.Router;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import javafx.fxml.FXML;
@@ -44,6 +45,8 @@ public class ProfileController {
     @FXML
     public void initialize() {
         List<Post> posts = BackendService.getLoginResponse().getPosts();
+        Collections.reverse(posts);
+
         User user = BackendService.getLoginResponse().getUser();
 
         appBarLabel.setText(user.getName());

@@ -1,12 +1,16 @@
 package com.example.yclient.Service;
 
+import com.example.yclient.Model.Post;
 import com.example.yclient.Model.RegisterCommand;
 import com.example.yclient.Util.ClientSocket;
 import com.example.yclient.Model.LoginCommand;
 import com.example.yclient.Model.responses.LoginResponse;
 import com.example.yclient.Util.NetworkManager;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.mindrot.jbcrypt.BCrypt;
+
+import java.util.List;
 
 public class BackendService {
     public static LoginResponse getLoginResponse() {
@@ -47,11 +51,28 @@ public class BackendService {
         }
     }
 
-    public void Post(String content) {
+    public void UpdateMyPosts() {
+        NetworkManager.getInstance().send("my posts");
+        Gson gson = new Gson();
+        var json = NetworkManager.getInstance().tryReceive();
+        if (json != null) {
+            List<Post> posts = gson.fromJson(json, new TypeToken<List<Post>>() {
+            }.getType());
+            loginResponse.setPosts(posts);
+        }
+    }
+
+    public boolean Post(String content) {
         NetworkManager.getInstance().send("add post");
         NetworkManager.getInstance().send(content);
 
-        var res = NetworkManager.getInstance().tryReceive();
-        System.out.println("Server: " + res);
+        Gson gson = new Gson();
+        var json = NetworkManager.getInstance().tryReceive();
+        if (json != null) {
+            UpdateMyPosts();
+            return true;
+        } else {
+            return false;
+        }
     }
 }
