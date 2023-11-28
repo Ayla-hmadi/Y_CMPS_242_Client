@@ -76,7 +76,10 @@ public class ExploreController {
                 iv.setFitWidth(42);
                 Button followBtn = new Button("Follow");
                 followBtn.getStyleClass().add("btn-quaternary");
-                followBtn.setOnAction(e -> follow(u));
+                followBtn.setOnAction(e -> {
+                    follow(u);
+                    followBtn.setText("Following");
+                });
                 VBox vb = new VBox();
                 Label nameLabel = new Label(u.getName());
                 nameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: 700;");

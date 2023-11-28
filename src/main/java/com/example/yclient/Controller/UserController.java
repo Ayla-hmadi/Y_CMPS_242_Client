@@ -7,6 +7,7 @@ import com.example.yclient.Util.ComponentBuilder;
 import com.example.yclient.Util.Router;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -27,11 +28,15 @@ public class UserController {
     private VBox postsContainer;
     @FXML
     private Label followerCount;
+    @FXML
+    private Button followBtn;
     private final Router router = new Router();
     private final ComponentBuilder cb = new ComponentBuilder();
 
     @FXML
     private void follow(ActionEvent e) {
+        new BackendService().followUser(BackendService.currentUserProfile.getUsername());
+        followBtn.setText("Following");
     }
 
     @FXML
