@@ -64,8 +64,11 @@ public class ExploreController {
         usernameLabel.setText("@" + user.getUsername());
 
         if (users != null) {
-            for (int i = 0; i < 3; i++) {
-                User u = users.get(i);
+            int i = 0;
+            for (User u : users) {
+                if (i++ == 3) {
+                    break;
+                }
                 BorderPane bp = new BorderPane();
                 ImageView iv = new ImageView();
                 iv.setImage(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("Asset/avatar.png"))));
