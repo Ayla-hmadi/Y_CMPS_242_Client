@@ -111,7 +111,7 @@ public class BackendService {
             NetworkManager.getInstance().send("GetRandomUsersToFollow");
 
             String jsonResponse = NetworkManager.getInstance().tryReceive();
-
+            System.out.println(jsonResponse);
             if (jsonResponse != null && !jsonResponse.isEmpty()) {
                 Gson gson = new Gson();
                 Type userListType = new TypeToken<List<User>>(){}.getType();

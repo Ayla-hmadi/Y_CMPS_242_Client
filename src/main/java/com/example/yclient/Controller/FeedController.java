@@ -47,7 +47,8 @@ public class FeedController {
     public void initialize() {
         User user = BackendService.getLoginResponse().getUser();
         if (BackendService.getLoginResponse().getPosts() != null) {
-            posts = BackendService.getLoginResponse().getPosts();
+            new BackendService().GetFeedPosts();
+            posts = BackendService.feedPosts;
             Collections.reverse(posts);
         }
         nameLabel.setText(user.getName());
