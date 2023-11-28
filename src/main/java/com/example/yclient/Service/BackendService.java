@@ -148,4 +148,34 @@ public class BackendService {
             currentUserProfile = gson.fromJson(json, UserInfoResponse.class);
         }
     }
+
+    public List<Following> getFollowing() {
+        NetworkManager.getInstance().send("getFollowingByUsername");
+        NetworkManager.getInstance().send(loginResponse.getUser().getUsername());
+
+        Gson gson = new Gson();
+        var json = NetworkManager.getInstance().tryReceive();
+        System.out.println(json);
+        if (json != null) {
+            return gson.fromJson(json, new TypeToken<List<Following>>() {
+            }.getType());
+        }
+
+        return null;
+    }
+
+    public List<Following> getFollowers() {
+        NetworkManager.getInstance().send("getFollowersByUsername");
+        NetworkManager.getInstance().send(loginResponse.getUser().getUsername());
+
+        Gson gson = new Gson();
+        var json = NetworkManager.getInstance().tryReceive();
+        System.out.println(json);
+        if (json != null) {
+            return gson.fromJson(json, new TypeToken<List<Following>>() {
+            }.getType());
+        }
+
+        return null;
+    }
 }

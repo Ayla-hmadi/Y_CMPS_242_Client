@@ -1,5 +1,6 @@
 package com.example.yclient.Controller;
 
+import com.example.yclient.Model.Following;
 import com.example.yclient.Model.Post;
 import com.example.yclient.Model.User;
 import com.example.yclient.Service.BackendService;
@@ -28,6 +29,8 @@ public class ProfileController {
     private Label profileNameLabel;
     @FXML
     private Label profileUsernameLabel;
+    @FXML
+    private Label followerCount;
 
     private final Router router = new Router();
     private final ComponentBuilder cb = new ComponentBuilder();
@@ -47,6 +50,10 @@ public class ProfileController {
         List<Post> posts = BackendService.getLoginResponse().getPosts();
         Collections.reverse(posts);
 
+        var service = new BackendService();
+        var following = service.getFollowing().size();
+        var followers = service.getFollowers().size();
+
         User user = BackendService.getLoginResponse().getUser();
 
         appBarLabel.setText(user.getName());
@@ -58,5 +65,7 @@ public class ProfileController {
         for (Post post : posts) {
             postsContainer.getChildren().add(cb.buildPost(post));
         }
+
+        followerCount.setText(following + " Following     " + followers + " Followers");
     }
 }
