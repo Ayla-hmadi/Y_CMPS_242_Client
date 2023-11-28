@@ -53,7 +53,11 @@ public class ComponentBuilder {
         nameBtn.setOnAction(e -> {
             try {
                 new BackendService().getUserInfo(post.getUsername());
-                router.navigate(e, "View/user.fxml");
+                if (BackendService.loginResponse.getUser().getUsername().equals(post.getUsername())) {
+                    router.navigate(e, "View/profile.fxml");
+                } else {
+                    router.navigate(e, "View/user.fxml");
+                }
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -109,6 +113,7 @@ public class ComponentBuilder {
             });
         }
     }
+
     private void resetButtonColor(Button button) {
         button.setStyle("");
     }
