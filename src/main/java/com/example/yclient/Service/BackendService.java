@@ -31,7 +31,9 @@ public class BackendService {
         System.out.println(json);
         if (json != null) {
             loginResponse = gson.fromJson(json, LoginResponse.class);
-            GetFeedPosts();
+            if (loginResponse.isSuccess()) {
+                GetFeedPosts();
+            }
             return loginResponse;
         } else {
             return null;
@@ -114,8 +116,9 @@ public class BackendService {
             System.out.println(jsonResponse);
             if (jsonResponse != null && !jsonResponse.isEmpty()) {
                 Gson gson = new Gson();
-                Type userListType = new TypeToken<List<User>>(){}.getType();
-                return  gson.fromJson(jsonResponse, userListType);
+                Type userListType = new TypeToken<List<User>>() {
+                }.getType();
+                return gson.fromJson(jsonResponse, userListType);
 
             }
         } catch (Exception e) {

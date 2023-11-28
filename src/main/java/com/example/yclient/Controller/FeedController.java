@@ -65,6 +65,7 @@ public class FeedController {
         posts = BackendService.feedPosts;
         Collections.reverse(posts);
 
+        postsContainer.getChildren().clear();
         for (Post post : posts) {
             postsContainer.getChildren().add(cb.buildPost(post));
         }

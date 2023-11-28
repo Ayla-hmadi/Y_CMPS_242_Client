@@ -55,14 +55,14 @@ public class MultiThreadClientSocket {
                         try {
                             var post = new Gson().fromJson(json, Post.class);
                             Platform.runLater(() -> {
-                                // show notification
-                                NotificationUtil.showNotification("[New post] " + post.getUsername() + ": " + post.getContent());
                                 // update posts
                                 var controller = Router.getCurrentController();
                                 if (controller instanceof FeedController) {
                                     var feedController = (FeedController) controller;
                                     feedController.refreshFeed();
                                 }
+                                // show notification
+                                NotificationUtil.showNotification("[New post] " + post.getUsername() + ": " + post.getContent());
                             });
                         } catch (JsonSyntaxException e) {
                             System.out.println("Invalid json");
