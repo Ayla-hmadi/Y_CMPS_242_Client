@@ -25,6 +25,8 @@ public class FeedController {
     @FXML
     private Label nameLabel;
     @FXML
+    private Label postNumber;
+    @FXML
     private Label usernameLabel;
     private final Router router = new Router();
     private final ComponentBuilder cb = new ComponentBuilder();
@@ -53,6 +55,8 @@ public class FeedController {
         }
         nameLabel.setText(user.getName());
         usernameLabel.setText("@" + user.getUsername());
+
+        postNumber.setText("Showing " + posts.size() + " posts");
 
         for (Post post : posts) {
             postsContainer.getChildren().add(cb.buildPost(post));

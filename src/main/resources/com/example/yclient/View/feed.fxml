@@ -210,7 +210,7 @@
                               <Insets bottom="12.0" left="20.0" right="20.0" top="24.0" />
                            </padding>
                         </BorderPane>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="569.0" style="-fx-background-color: white; -fx-border-width: 0 0 1 0; -fx-border-color: #eee;" text="Showing 10 tweets" textAlignment="JUSTIFY" textFill="#30a5ff">
+                        <Label fx:id="postNumber" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="569.0" style="-fx-background-color: white; -fx-border-width: 0 0 1 0; -fx-border-color: #eee;" text="Showing 10 tweets" textAlignment="JUSTIFY" textFill="#30a5ff">
                            <padding>
                               <Insets bottom="8.0" top="8.0" />
                            </padding>
