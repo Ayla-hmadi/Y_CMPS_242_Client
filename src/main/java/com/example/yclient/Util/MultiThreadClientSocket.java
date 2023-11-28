@@ -1,9 +1,16 @@
 package com.example.yclient.Util;
 
+import com.example.yclient.Controller.FeedController;
+import com.example.yclient.Model.Post;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import javafx.application.Platform;
+
 import java.io.*;
 import java.net.Socket;
 
 public class MultiThreadClientSocket {
+    public static final String EventPrefix = "event:";
     public static String SERVER_IP_ADDRESS = "127.0.0.1";
     public static int SERVER_PORT = 6969;
     //    private final InputStreamReader inputStream;
@@ -42,9 +49,24 @@ public class MultiThreadClientSocket {
                 while (!sharedReader.readLine().equals("OVER")) ;
                 String serverResponse;
                 while ((serverResponse = sharedReader.readLine()) != null) {
-                    if (serverResponse.startsWith("event:")) {
+                    if (serverResponse.startsWith(EventPrefix)) {
                         System.out.println("[server event]: " + serverResponse);
-
+                        var json = serverResponse.substring(EventPrefix.length());
+                        try {
+                            var post = new Gson().fromJson(json, Post.class);
+                            Platform.runLater(() -> {
+                                // show notification
+                                NotificationUtil.showNotification("[New post] " + post.getUsername() + ": " + post.getContent());
+                                // update posts
+                                var controller = Router.getCurrentController();
+                                if (controller instanceof FeedController) {
+                                    var feedController = (FeedController) controller;
+                                    feedController.refreshFeed();
+                                }
+                            });
+                        } catch (JsonSyntaxException e) {
+                            System.out.println("Invalid json");
+                        }
                     } else {
                         System.out.println("Received from server: " + serverResponse);
                         writer.println(serverResponse);

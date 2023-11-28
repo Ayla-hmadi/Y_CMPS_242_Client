@@ -1,8 +1,6 @@
 package com.example.yclient;
 
-import com.example.yclient.Util.ClientSocket;
-import com.example.yclient.Util.MultiThreadClientSocket;
-import com.example.yclient.Util.NetworkManager;
+import com.example.yclient.Util.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,6 +20,7 @@ public class Main extends Application {
 
         Scene scene = new Scene(root, 800, 600);
         scene.getStylesheets().add(Main.class.getResource("View/main.css").toExternalForm());
+        Router.init(loader, stage);
 
         stage.setTitle("Y. It's what's happening.");
         stage.setResizable(false);

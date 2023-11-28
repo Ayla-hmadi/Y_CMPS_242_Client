@@ -31,13 +31,13 @@ public class FeedController {
     private List<Post> posts = new ArrayList<>();
 
     @FXML
-    private void post(ActionEvent e) throws IOException{
+    private void post(ActionEvent e) throws IOException {
         if (postTextArea.getText().isBlank()) {
             return;
         }
 
         var service = new BackendService();
-        if(service.Post(postTextArea.getText())){
+        if (service.Post(postTextArea.getText())) {
             System.out.println("Posted successfully");
             router.navigate(e, "View/feed.fxml");
         }
@@ -53,6 +53,17 @@ public class FeedController {
         }
         nameLabel.setText(user.getName());
         usernameLabel.setText("@" + user.getUsername());
+
+        for (Post post : posts) {
+            postsContainer.getChildren().add(cb.buildPost(post));
+        }
+    }
+
+    @FXML
+    public void refreshFeed() {
+        new BackendService().GetFeedPosts();
+        posts = BackendService.feedPosts;
+        Collections.reverse(posts);
 
         for (Post post : posts) {
             postsContainer.getChildren().add(cb.buildPost(post));
