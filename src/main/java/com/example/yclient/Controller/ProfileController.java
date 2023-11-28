@@ -5,6 +5,7 @@ import com.example.yclient.Model.Post;
 import com.example.yclient.Model.User;
 import com.example.yclient.Service.BackendService;
 import com.example.yclient.Util.ComponentBuilder;
+import com.example.yclient.Util.NetworkManager;
 import com.example.yclient.Util.Router;
 import javafx.event.ActionEvent;
 
@@ -34,6 +35,12 @@ public class ProfileController {
 
     private final Router router = new Router();
     private final ComponentBuilder cb = new ComponentBuilder();
+
+    @FXML
+    private void logout(ActionEvent e) throws IOException{
+        NetworkManager.terminate();
+        router.navigate(e, "View/main.fxml");
+    }
 
     @FXML
     private void goToMainView(ActionEvent e) throws IOException {

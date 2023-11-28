@@ -11,6 +11,7 @@ public class NetworkManager {
     public static void terminate() throws IOException {
         if (instance != null) {
             instance.close();
+            instance = null;
         }
     }
 
