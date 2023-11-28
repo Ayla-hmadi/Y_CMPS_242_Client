@@ -21,18 +21,18 @@ import java.util.Objects;
 
 public class ComponentBuilder {
     private final Router router = new Router();
-    private final Map<ReactionType, Button> reactionButtons = new HashMap<>();
 
-    ReactionType isSelectedNow ;
+    private final Map<Integer, Map<ReactionType, Button>> postReactions = new HashMap<>();
 
-    private Button getIconButton(String iconPath, ReactionType type) {
+    private Button getIconButton(String iconPath, ReactionType type, int postId) {
         Button btn = new Button();
         ImageView iv = new ImageView(new Image(Objects.requireNonNull(Main.class.getResourceAsStream(iconPath))));
         iv.setFitHeight(18);
         iv.setFitWidth(18);
         btn.setGraphic(iv);
         btn.getStyleClass().add("btn-icon");
-        reactionButtons.put(type, btn);
+        btn.setOnAction(e -> react(postId, type, btn));
+        postReactions.computeIfAbsent(postId, k -> new HashMap<>()).put(type, btn);
         return btn;
     }
 
@@ -73,17 +73,11 @@ public class ComponentBuilder {
         reactionHB.setSpacing(64);
 
         reactionHB.getChildren().addAll(
-                getIconButton("Asset/like.png", ReactionType.LIKE),
-                getIconButton("Asset/dislike.png", ReactionType.DISLIKE),
-                getIconButton("Asset/love.png", ReactionType.LOVE),
-                getIconButton("Asset/laugh.png", ReactionType.LAUGH),
-                getIconButton("Asset/cry.png", ReactionType.CRY));
-
-        for (Map.Entry<ReactionType, Button> entry : reactionButtons.entrySet()) {
-            ReactionType type = entry.getKey();
-            Button button = entry.getValue();
-            button.setOnAction(e -> react(post.getId(), type));
-        };
+                getIconButton("Asset/like.png", ReactionType.LIKE, post.getId()),
+                getIconButton("Asset/dislike.png", ReactionType.DISLIKE, post.getId()),
+                getIconButton("Asset/love.png", ReactionType.LOVE, post.getId()),
+                getIconButton("Asset/laugh.png", ReactionType.LAUGH, post.getId()),
+                getIconButton("Asset/cry.png", ReactionType.CRY, post.getId()));
 
         vb.setStyle("-fx-padding: 0px 10px;");
         bp.setLeft(iv);
@@ -95,31 +89,39 @@ public class ComponentBuilder {
         return bp;
     }
 
-    private void react(int postId, ReactionType reactionType) {
+    private void react(int postId, ReactionType reactionType, Button button) {
         BackendService backendService = new BackendService();
         backendService.reactToPost(postId, reactionType);
-        updateButtonStyles(reactionType);
+        updateButtonStyles(postId, reactionType);
     }
 
-    private void updateButtonStyles(ReactionType selectedReaction) {
+    private void updateButtonStyles(int postId, ReactionType selectedReaction) {
+        Map<ReactionType, Button> reactions = postReactions.get(postId);
 
-        reactionButtons.forEach((type, button) -> {
-            if (type == selectedReaction && isSelectedNow != selectedReaction) {
-                button.setStyle("-fx-background-color: " + getColorForReactionType(type) + ";");
-                isSelectedNow = selectedReaction;
-            } else {
-                button.setStyle("");
-            }
-        });
+        if (reactions != null) {
+            reactions.forEach((type, button) -> {
+                if (type == selectedReaction) {
+                    toggleButtonStyle(button, type);
+                } else {
+                    resetButtonColor(button);
+                }
+            });
+        }
     }
-
     private void resetButtonColor(Button button) {
         button.setStyle("");
     }
 
-    private void setButtonColor(Button button, ReactionType reactionType) {
-        String color = getColorForReactionType(reactionType);
-        button.setStyle("-fx-background-color: " + color + ";");
+    private void toggleButtonStyle(Button button, ReactionType reactionType) {
+        String currentStyle = button.getStyle();
+        boolean isSelected = currentStyle.contains("background-color");
+
+        if (isSelected) {
+            button.setStyle("");
+        } else {
+            String color = getColorForReactionType(reactionType);
+            button.setStyle("-fx-background-color: " + color + ";");
+        }
     }
 
     private String getColorForReactionType(ReactionType reactionType) {
