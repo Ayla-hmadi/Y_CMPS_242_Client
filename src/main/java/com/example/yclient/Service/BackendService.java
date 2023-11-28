@@ -1,10 +1,8 @@
 package com.example.yclient.Service;
 
-import com.example.yclient.Model.Post;
-import com.example.yclient.Model.RegisterCommand;
-import com.example.yclient.Model.User;
+import com.example.yclient.Model.*;
+import com.example.yclient.Model.enums.ReactionType;
 import com.example.yclient.Util.ClientSocket;
-import com.example.yclient.Model.LoginCommand;
 import com.example.yclient.Model.responses.LoginResponse;
 import com.example.yclient.Util.NetworkManager;
 import com.google.gson.Gson;
@@ -127,4 +125,10 @@ public class BackendService {
         return null;
     }
 
+    public void reactToPost(int postId, ReactionType reactionType) {
+        var command = new AddReactionCommand(postId, reactionType);
+        NetworkManager.getInstance().send("react");
+        Gson gson = new Gson();
+        NetworkManager.getInstance().send(gson.toJson(command));
+    }
 }

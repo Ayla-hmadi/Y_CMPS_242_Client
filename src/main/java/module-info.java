@@ -10,4 +10,5 @@ module com.example.yclient {
     opens com.example.yclient.Controller to javafx.fxml;
     opens com.example.yclient.Model.responses to com.google.gson;
     opens com.example.yclient.Model to com.google.gson;
+    exports com.example.yclient.Model.enums to com.google.gson;
 }
