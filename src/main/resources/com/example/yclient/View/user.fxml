@@ -151,7 +151,7 @@
                         </Button>
                     </left>
                     <center>
-                        <Label prefHeight="17.0" prefWidth="517.0" text="Name" BorderPane.alignment="CENTER">
+                        <Label fx:id="userUsername" prefHeight="17.0" prefWidth="517.0" text="Name" BorderPane.alignment="CENTER">
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>
@@ -191,17 +191,17 @@
                         </HBox>
                                 <VBox spacing="2.0">
                                     <children>
-                                        <Label text=" Name Name">
+                                        <Label fx:id="userName" text=" Name Name">
                                             <font>
                                                 <Font name="System Bold" size="16.0" />
                                             </font>
                                         </Label>
-                                        <Label text="\@username" textFill="#000000ac">
+                                        <Label fx:id="userHandle" text="\@username" textFill="#000000ac">
                                             <font>
                                                 <Font size="14.0" />
                                             </font>
                                         </Label>
-                                        <Label text=" 1 Following     1 Follower">
+                                        <Label fx:id="followerCount" text=" 1 Following     1 Follower">
                                             <VBox.margin>
                                                 <Insets top="4.0" />
                                             </VBox.margin>

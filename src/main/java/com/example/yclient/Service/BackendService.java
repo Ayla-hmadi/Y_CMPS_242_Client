@@ -2,6 +2,7 @@ package com.example.yclient.Service;
 
 import com.example.yclient.Model.*;
 import com.example.yclient.Model.enums.ReactionType;
+import com.example.yclient.Model.responses.UserInfoResponse;
 import com.example.yclient.Util.ClientSocket;
 import com.example.yclient.Model.responses.LoginResponse;
 import com.example.yclient.Util.NetworkManager;
@@ -19,6 +20,7 @@ public class BackendService {
 
     public static LoginResponse loginResponse;
     public static List<Post> feedPosts;
+    public static UserInfoResponse currentUserProfile;
 
     public LoginResponse Login(String username, String password) {
 //        var hashedPasswrd = BCrypt.hashpw(password, BCrypt.gensalt());
@@ -133,5 +135,17 @@ public class BackendService {
         NetworkManager.getInstance().send("react");
         Gson gson = new Gson();
         NetworkManager.getInstance().send(gson.toJson(command));
+    }
+
+    public void getUserInfo(String username) {
+        NetworkManager.getInstance().send("GetUserInfoForUserProfile");
+        NetworkManager.getInstance().send(username);
+
+        Gson gson = new Gson();
+        var json = NetworkManager.getInstance().tryReceive();
+        System.out.println(json);
+        if (json != null) {
+            currentUserProfile = gson.fromJson(json, UserInfoResponse.class);
+        }
     }
 }

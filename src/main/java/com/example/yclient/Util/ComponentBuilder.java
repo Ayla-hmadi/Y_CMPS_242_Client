@@ -52,6 +52,7 @@ public class ComponentBuilder {
         nameBtn.setGraphic(nameLabel);
         nameBtn.setOnAction(e -> {
             try {
+                new BackendService().getUserInfo(post.getUsername());
                 router.navigate(e, "View/user.fxml");
             } catch (IOException ex) {
                 ex.printStackTrace();
