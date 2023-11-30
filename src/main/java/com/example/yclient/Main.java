@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class Main extends Application {
     private static final String DEFAULT_SERVER_IP = "127.0.0.1";
-    public static final int BROADCAST_PORT = 43211;
+    public static final int BROADCAST_PORT = 44444;
     private static final int DEFAULT_SERVER_PORT = 43211;
 
     @Override
