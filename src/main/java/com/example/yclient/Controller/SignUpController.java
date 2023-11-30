@@ -1,5 +1,6 @@
 package com.example.yclient.Controller;
 
+import com.example.yclient.Service.BackendService;
 import com.example.yclient.Util.Router;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -53,13 +54,25 @@ public class SignUpController implements Initializable {
     }
 
     @FXML
-    protected void signUp() {
+    protected void signUp(ActionEvent e) {
         try {
             if (usernameField.getText().isBlank() || passwordField.getText().isBlank()) {
                 inputMessage2.setText("Please enter your username and password.");
             } else {
                 inputMessage2.setText("");
-                System.out.println("signup");
+                var service = new BackendService();
+                var loginResult = service.SignUp(
+                        usernameField.getText(),
+                        nameField.getText(),
+                        emailField.getText(),
+                        passwordField.getText(),
+                        addressField.getText()
+                );
+                if (loginResult.isSuccess()) {
+                    router.navigate(e, "View/feed.fxml");
+                } else {
+                    inputMessage2.setText("Oops! Something went wrong.");
+                }
             }
         } catch (Exception ex) {
             inputMessage.setText("Oops! Something went wrong.");

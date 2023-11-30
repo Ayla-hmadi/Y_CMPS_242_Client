@@ -1,5 +1,6 @@
 package com.example.yclient.Controller;
 
+import com.example.yclient.Service.BackendService;
 import com.example.yclient.Util.Router;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -19,12 +20,18 @@ public class SignInController {
     private final Router router = new Router();
 
     @FXML
-    protected void signIn() {
+    protected void signIn(ActionEvent e) {
         try {
             if (usernameField.getText().isBlank() || passwordField.getText().isBlank()) {
                 inputMessage.setText("Please enter your username and password.");
             } else {
-                System.out.println("login");
+                var service = new BackendService();
+                var loginResult = service.Login(usernameField.getText(), passwordField.getText());
+                if (loginResult.isSuccess()) {
+                    router.navigate(e, "View/feed.fxml");
+                } else {
+                    inputMessage.setText(loginResult.getError());
+                }
             }
         } catch (Exception ex) {
             inputMessage.setText("Oops! Something went wrong.");
