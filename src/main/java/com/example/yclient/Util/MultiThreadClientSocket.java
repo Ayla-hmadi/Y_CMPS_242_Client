@@ -23,8 +23,12 @@ public class MultiThreadClientSocket {
     private Thread readerThread;
 
     MultiThreadClientSocket() {
+        this(SERVER_IP_ADDRESS, SERVER_PORT);
+    }
+
+    MultiThreadClientSocket(String ipAddress, int portNumber) {
         try {
-            socket = new Socket(SERVER_IP_ADDRESS, SERVER_PORT);
+            socket = new Socket(ipAddress, portNumber);
 //            sharedInputStream = new BufferedInputStream(socket.getInputStream());
 //            inputStream = new InputStreamReader(socket.getInputStream());
             pipedOutputStream = new PipedOutputStream();
@@ -64,8 +68,8 @@ public class MultiThreadClientSocket {
                                 // show notification
                                 NotificationUtil.showNotification("[New post] " + post.getUsername() + ": " + post.getContent());
                             });
-                        } catch (JsonSyntaxException e) {
-                            System.out.println("Invalid json");
+                        } catch (Exception e) {
+                            System.out.println("Event notification error");
                         }
                     } else {
                         System.out.println("Received from server: " + serverResponse);

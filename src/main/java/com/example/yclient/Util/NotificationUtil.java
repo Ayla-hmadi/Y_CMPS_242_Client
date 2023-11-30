@@ -41,7 +41,10 @@ public class NotificationUtil {
         notificationStage.setX(mainStageX + 40);
         notificationStage.setY(mainStageY + 40);
 
-        timeline.setOnFinished(event -> notificationStage.close());
+        timeline.setOnFinished(event -> {
+            notificationStage.close();
+
+        });
         timeline.play();
         scene.setFill(null);
         notificationStage.show();

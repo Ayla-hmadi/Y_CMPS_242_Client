@@ -11,6 +11,7 @@ import java.io.IOException;
 
 public class Main extends Application {
     private static final String DEFAULT_SERVER_IP = "127.0.0.1";
+    public static final int BROADCAST_PORT = 43211;
     private static final int DEFAULT_SERVER_PORT = 43211;
 
     @Override
@@ -42,6 +43,7 @@ public class Main extends Application {
             MultiThreadClientSocket.SERVER_PORT = DEFAULT_SERVER_PORT;
             MultiThreadClientSocket.SERVER_IP_ADDRESS = DEFAULT_SERVER_IP;
         }
+        NetworkManager.initialize();
 
         launch();
     }
